@@ -1,0 +1,21 @@
+class Solution {
+    int minCost(int[] height) {
+        Map<Integer,Integer> dp = new HashMap<>();
+        int ans = f(height, height.length-1,dp);
+        return ans;
+    }
+    public static int f(int a[], int ind, Map<Integer,Integer> dp)
+    {
+        if(ind == 0) return 0;
+        if(dp.containsKey(ind)) return dp.get(ind);
+        int left = f(a,ind-1, dp)+Math.abs(a[ind]-a[ind-1]);
+        int right = Integer.MAX_VALUE;
+        if(ind>1)
+        {
+            right = f(a,ind-2, dp)+Math.abs(a[ind]-a[ind-2]);
+        }
+        int min = Math.min(left,right);
+        dp.put(ind, min);
+        return min;
+    }
+}
