@@ -9,12 +9,10 @@ class Solution {
             int right  = nums.length-1;
             while(left<right)
             {
-                List<Integer> triple = new ArrayList<>();
                 int sum = nums[i]+nums[left]+nums[right];
                 if(sum == 0)
                 {
-                    triple = Arrays.asList(nums[i],nums[left],nums[right]);
-                    result.add(triple);
+                    result.add(Arrays.asList(nums[i],nums[left],nums[right]));
                     left++;
                     right--;
                     while(left<right && nums[left]<nums[left-1]) left++;
