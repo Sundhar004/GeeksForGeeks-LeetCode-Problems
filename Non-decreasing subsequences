@@ -1,0 +1,26 @@
+class Solution {
+    List<List<Integer>> ans = new ArrayList<>();
+    public List<List<Integer>> findSubsequences(int[] nums) {
+        subseq(0, nums, new ArrayList<>(), ans);
+        return ans;
+    }
+    public void subseq(int start, int nums[], List<Integer> list, List<List<Integer>> ans)
+    {
+        if(list.size() > 1)
+        {
+            ans.add(new ArrayList<>(list));
+        }
+        Set<Integer> set = new HashSet<>();
+        for(int i=start;i<nums.length;i++)
+        {
+           if(set.contains(nums[i])) continue;
+           if(list.size()==0 || nums[i] >= list.get(list.size()-1))
+           {
+              list.add(nums[i]);
+              set.add(nums[i]);
+              subseq(i+1, nums, list, ans);
+              list.remove(list.size()-1);
+           } 
+        }
+    }
+}
