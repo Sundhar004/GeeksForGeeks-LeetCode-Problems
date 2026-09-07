@@ -1,0 +1,23 @@
+class Solution {
+    public int firstStableIndex(int[] nums, int k) {
+        if(nums.length == 1 && nums[0] <= k) return 0;
+        int l=0, r=0;
+        while(l<nums.length && r<nums.length)
+        {
+            int max = -1;
+            for(int i=0; i<=l; i++)
+            {
+                if(nums[i]>max) max = nums[i]; 
+            }
+            int min = Integer.MAX_VALUE;
+            for(int j=r; j<nums.length; j++)
+            {
+                if(nums[j]<min) min = nums[j];
+            }
+            if(max-min <= k)return l;
+            l++;
+            r++;
+        }
+        return -1;
+    }
+}
