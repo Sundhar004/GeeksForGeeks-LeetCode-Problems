@@ -1,0 +1,56 @@
+class Solution {
+    public int minimumDeletions(int[] nums) {
+        int front=0, back=0, both=0, i=0, j=nums.length-1;
+        int max=Integer.MIN_VALUE, min=Integer.MAX_VALUE;
+        int b1 = 0, b2 = 0;
+        boolean minBool = false, maxBool = false;
+
+        for(int n:nums)
+        {
+            if(n>max) max=n;
+            if(n<min) min=n; 
+        }
+
+        //front
+        while(i<nums.length && (!minBool || !maxBool))
+        {
+            if(nums[i] == min) minBool = true;
+            if(nums[i] == max) maxBool = true;
+            front++;
+            i++;
+        }
+
+        minBool = false;
+        maxBool = false;
+        //back
+        while(j>=0 && (!minBool || !maxBool))
+        {
+            if(nums[j] == min) minBool = true;
+            if(nums[j] == max) maxBool = true;
+            back++;
+            j--;   
+        }
+        
+        i=0;
+        minBool = false;
+        maxBool = false;
+
+        //both
+        while(i<nums.length && j>=0 && (!minBool || !maxBool))
+        {
+            b1++;
+            b2++;
+            if(nums[i] == min)
+            {
+                minBool = true;
+            }
+            if(nums[i] == max)
+            {
+                maxBool = true;
+            }
+            i++;
+            j--;
+        }
+        return Math.min(front,Math.min(back, b1+1+nums.length-b2));
+    }
+}
