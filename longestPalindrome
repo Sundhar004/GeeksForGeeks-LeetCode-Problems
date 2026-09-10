@@ -1,0 +1,15 @@
+class Solution {
+public:
+    int longestPalindrome(string s) {
+        int oddCount = 0;
+        unordered_map<char,int>m; //for less time clx
+        for(char c:s)
+        {
+            m[c]++;
+            if(m[c]%2 == 1) oddCount++;
+            else oddCount--;
+        }
+        if(oddCount>1)return s.length()-oddCount+1;
+        return s.length();
+    }
+};
